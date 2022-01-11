@@ -98,6 +98,10 @@ public class Instruction : ListNode, CustomStringConvertible, Hashable {
     }
   }
 
+  final public var mayReleaseOrReadRefCount: Bool {
+    return SILInstruction_mayReleaseOrReadRefCount(bridged)
+  }
+
   public static func ==(lhs: Instruction, rhs: Instruction) -> Bool {
     lhs === rhs
   }
@@ -237,7 +241,9 @@ final public class SetDeallocatingInst : Instruction, UnaryInstruction {}
 
 final public class DeallocRefInst : Instruction, UnaryInstruction {}
 
-public class RefCountingInst : Instruction, UnaryInstruction {}
+public class RefCountingInst : Instruction, UnaryInstruction {
+  public var isAtomic: Bool { RefCountingInst_getIsAtomic(bridged) }
+}
 
 final public class StrongRetainInst : RefCountingInst {
 }
@@ -354,8 +360,6 @@ final public class GlobalAddrInst : GlobalAccessInst {}
 final public class GlobalValueInst : GlobalAccessInst {}
 
 final public class IntegerLiteralInst : SingleValueInstruction {}
-
-final public class FunctionRefInst: SingleValueInstruction {}
 
 final public class TupleInst : SingleValueInstruction {
 }
@@ -515,6 +519,9 @@ final public class BeginApplyInst : MultipleValueInstruction, FullApplySite {
   public var numArguments: Int { BeginApplyInst_numArguments(bridged) }
 
   public var singleDirectResult: Value? { nil }
+}
+
+final public class RefToBridgeObjectInst: MultipleValueInstruction {
 }
 
 //===----------------------------------------------------------------------===//

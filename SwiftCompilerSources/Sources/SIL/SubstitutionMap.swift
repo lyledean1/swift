@@ -1,4 +1,4 @@
-//===--- PassUtils.swift - Utilities for optimzation passes ---------------===//
+//===--- SubstitutionMap.swift - Swift Substitution Map ASTs --------------===//
 //
 // This source file is part of the Swift.org open source project
 //

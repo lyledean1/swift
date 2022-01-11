@@ -151,7 +151,7 @@ RCIdentityAnalysis_getFunctionInfo(BridgedRCIdentityAnalysis bridgedAnalysis,
 BridgedValue RCIdentityFunctionInfo_getRCIdentityRoot(
     BridgedRCIdentityFunctionInfo bridgedInfo, BridgedValue value);
 
-OptionalBridgedFunction PassContext_getDeallocRef(BridgedPassContext context,
+OptionalBridgedFunction PassContext_getDestructor(BridgedPassContext context,
                                                   BridgedType type);
 
 BridgedSubstitutionMap

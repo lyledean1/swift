@@ -394,6 +394,10 @@ BridgedMemoryBehavior SILInstruction_getMemBehavior(BridgedInstruction inst) {
   return (BridgedMemoryBehavior)castToInst(inst)->getMemoryBehavior();
 }
 
+bool SILInstruction_mayReleaseOrReadRefCount(BridgedInstruction inst) {
+  return castToInst(inst)->mayReleaseOrReadRefCount();
+}
+
 BridgedInstruction MultiValueInstResult_getParent(BridgedMultiValueResult result) {
   return {static_cast<MultipleValueInstructionResult *>(result.obj)->getParent()};
 }
@@ -499,6 +503,11 @@ SwiftInt StoreInst_getStoreOwnership(BridgedInstruction store) {
   return (SwiftInt)castToInst<StoreInst>(store)->getOwnershipQualifier();
 }
 
+bool RefCountingInst_getIsAtomic(BridgedInstruction rc) {
+  return castToInst<RefCountingInst>(rc)->getAtomicity() ==
+         RefCountingInst::Atomicity::Atomic;
+}
+
 void RefCountingInst_setIsAtomic(BridgedInstruction rc, bool isAtomic) {
   castToInst<RefCountingInst>(rc)->setAtomicity(
       isAtomic ? RefCountingInst::Atomicity::Atomic
@@ -580,5 +589,4 @@ BridgedInstruction SILBuilder_createApply(BridgedInstruction insertionPoint,
   return {builder.createApply(getRegularLocation(loc), castToSILValue(function),
                               castToSubstitutionMap(subMap),
                               getSILValues(arguments, argValues))};
-}
 }

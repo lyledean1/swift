@@ -10,9 +10,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-import AST
-import SIL
 import OptimizerBridging
+import SIL
 
 public typealias BridgedFunctionPassCtxt =
   OptimizerBridging.BridgedFunctionPassCtxt
@@ -62,6 +61,10 @@ struct PassContext {
 
   private func notifyBranchesChanged() {
     PassContext_notifyChanges(_bridged, branchesChanged)
+  }
+
+  var rcIdentityAnalysis: RCIdentityAnalysis {
+    .init(bridged: PassContext_getRCIdentityAnalysis(_bridged))
   }
 
   enum EraseMode {
@@ -117,12 +120,12 @@ struct PassContext {
     PassContext_fixStackNesting(_bridged, function.bridged)
   }
 
-  func getDeallocRef(for type: Type) -> Function? {
-    PassContext_getDeallocRef(passContext, type.bridged).function
+  func getDestructor(ofClass type: Type) -> Function? {
+    PassContext_getDestructor(_bridged, type.bridged).function
   }
 
   func getContextSubstitutionMap(for type: Type) -> SubstitutionMap {
-    SubstitutionMap(PassContext_getContextSubstitutionMap(passContext, type.bridged))
+    SubstitutionMap(PassContext_getContextSubstitutionMap(_bridged, type.bridged))
   }
 }
 

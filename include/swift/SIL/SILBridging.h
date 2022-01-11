@@ -211,6 +211,7 @@ void SILInstruction_setOperand(BridgedInstruction inst, SwiftInt index,
                                BridgedValue value);
 BridgedLocation SILInstruction_getLocation(BridgedInstruction inst);
 BridgedMemoryBehavior SILInstruction_getMemBehavior(BridgedInstruction inst);
+bool SILInstruction_mayReleaseOrReadRefCount(BridgedInstruction inst);
 
 BridgedInstruction MultiValueInstResult_getParent(BridgedMultiValueResult result);
 SwiftInt MultipleValueInstruction_getNumResults(BridgedInstruction inst);
@@ -240,6 +241,7 @@ BridgedBasicBlock BranchInst_getTargetBlock(BridgedInstruction bi);
 SwiftInt SwitchEnumInst_getNumCases(BridgedInstruction se);
 SwiftInt SwitchEnumInst_getCaseIndex(BridgedInstruction se, SwiftInt idx);
 SwiftInt StoreInst_getStoreOwnership(BridgedInstruction store);
+bool RefCountingInst_getIsAtomic(BridgedInstruction rc);
 void RefCountingInst_setIsAtomic(BridgedInstruction rc, bool isAtomic);
 
 BridgedInstruction SILBuilder_createBuiltinBinaryFunction(
