@@ -355,6 +355,8 @@ final public class GlobalValueInst : GlobalAccessInst {}
 
 final public class IntegerLiteralInst : SingleValueInstruction {}
 
+final public class FunctionRefInst: SingleValueInstruction {}
+
 final public class TupleInst : SingleValueInstruction {
 }
 

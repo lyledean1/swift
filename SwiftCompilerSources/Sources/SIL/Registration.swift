@@ -80,6 +80,7 @@ public func registerSILClasses() {
   register(GlobalAddrInst.self)
   register(GlobalValueInst.self)
   register(IntegerLiteralInst.self)
+  register(FunctionRefInst.self)
   register(TupleInst.self)
   register(TupleExtractInst.self)
   register(TupleElementAddrInst.self)
